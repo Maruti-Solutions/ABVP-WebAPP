@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { FiSend } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 interface HelpModalProps {
   isOpen: boolean;
@@ -10,6 +10,7 @@ interface HelpModalProps {
 }
 
 const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -35,7 +36,19 @@ const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Help form submitted:', formData);
-    // Handle form submission here
+    
+    // Redirect to volunteer results page with location data
+    const searchParams = new URLSearchParams({
+      location: formData.currentLocation,
+      city: formData.city,
+      state: formData.state,
+      pincode: formData.pincode
+    });
+    
+    onClose();
+    navigate(`/volunteers?${searchParams.toString()}`);
+    
+    // Reset form
     setFormData({
       name: '',
       phone: '',
@@ -49,7 +62,6 @@ const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
       issue: '',
       currentLocation: ''
     });
-    onClose();
   };
 
   return (
