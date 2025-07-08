@@ -19,4 +19,12 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ["tailwindcss-animate"],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+  },
 }));
