@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiHelpCircle, FiUser, FiUserPlus } from 'react-icons/fi';
+import { FiHelpCircle, FiUserPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import ImageSlider from '../components/ImageSlider';
 import HelpModal from '../components/HelpModal';
@@ -26,11 +25,11 @@ const Home = () => {
           <div className="flex justify-between items-center flex-wrap lg:flex-nowrap">
             {/* Logo Section */}
             <div className="flex items-center gap-3 order-1">
-              <div className="w-16 h-16 md:w-20 md:h-20">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-transparent">
                 <img 
                   src="/lovable-uploads/be64dbdf-c51f-4b00-b49d-d6eebd8df4f8.png" 
                   alt="ABVP Logo" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain filter brightness-0 invert"
                 />
               </div>
               <div>
@@ -64,19 +63,8 @@ const Home = () => {
               </ul>
             </nav>
             
-            {/* Auth Buttons */}
+            {/* Auth Buttons - Only Register button now */}
             <div className="flex gap-2 md:gap-3 order-3">
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                onClick={() => navigate('/login')}
-                className="bg-transparent border-2 border-white text-white px-3 py-2 md:px-4 md:py-2 rounded font-semibold hover:bg-white hover:text-red-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover-element inline-flex items-center gap-2 text-sm md:text-base"
-              >
-                <FiUser className="w-3 h-3 md:w-4 md:h-4" />
-                Login
-              </motion.button>
-              
               <motion.button
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -272,11 +260,11 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12">
+                <div className="w-12 h-12 bg-transparent">
                   <img 
                     src="/lovable-uploads/be64dbdf-c51f-4b00-b49d-d6eebd8df4f8.png" 
                     alt="ABVP Logo" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain filter brightness-0 invert"
                   />
                 </div>
                 <div>
