@@ -5,9 +5,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ImageSlider = () => {
   const images = [
-    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+    "/lovable-uploads/3e2a3f38-6db5-4e4f-9ad7-44109bf1e0a6.png",
+    "/lovable-uploads/d22961eb-59f2-4ace-9e93-0ecc75dd1486.png",
+    "/lovable-uploads/82b01a73-476f-4a53-96e7-c320523386ed.png"
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,7 +34,7 @@ const ImageSlider = () => {
         <motion.img
           key={currentIndex}
           src={images[currentIndex]}
-          alt={`Slide ${currentIndex + 1}`}
+          alt={`ABVP Rally ${currentIndex + 1}`}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
