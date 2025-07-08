@@ -56,7 +56,7 @@ const Home = ({ session }: { session: Session | null }) => {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="text-xl md:text-2xl font-bold leading-tight"
                 >
-                  ABVP INDORE: MAY I HELP YOU
+                  ABVP Indore: May I Help You
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ const Home = ({ session }: { session: Session | null }) => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-xs md:text-sm opacity-90"
                 >
-                  Connecting students with volunteers
+                  Connecting students with dedicated volunteers in Indore
                 </motion.p>
               </div>
             </div>
@@ -145,7 +145,7 @@ const Home = ({ session }: { session: Session | null }) => {
                 transition={{ delay: 0.8, duration: 0.6 }}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
               >
-                ABVP INDORE: MAY I HELP YOU
+                ABVP Indore: Your Partner for Student Support
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -153,7 +153,7 @@ const Home = ({ session }: { session: Session | null }) => {
                 transition={{ delay: 1, duration: 0.6 }}
                 className="text-lg md:text-xl mb-8 opacity-90"
               >
-                ABVP connects students with volunteers for academic, medical, and other essential support services. Register and request assistance today!
+                ABVP Indore connects students with dedicated volunteers for academic, medical, and other essential support services. Get the help you need to succeed in Indore!
               </motion.p>
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
@@ -205,19 +205,17 @@ const Home = ({ session }: { session: Session | null }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.8 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-red-800">How It Works</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-red-800">How ABVP Indore Helps Students</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: "fas fa-user-plus",
-                title: "Register as Student",
-                description: "Create your student account with basic information to access our help services."
-              },
+                title: "Register as a Student in Indore",
+                description: "Create your student account with basic information to access our help services in Indore."
               {
                 icon: "fas fa-hands-helping",
-                title: "Request Help",
-                description: "Select the type of assistance you need and provide your location details."
-              }
+                title: "Request Help in Indore",
+                description: "Select the type of assistance you need and provide your location details within Indore."
             ].map((step, index) => (
               <motion.div
                 key={step.title}
@@ -230,8 +228,8 @@ const Home = ({ session }: { session: Session | null }) => {
                   <i className={`${step.icon} text-3xl md:text-4xl mb-4`}></i>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-red-800 mb-4">{step.title}</h3>
-                  <p className="text-gray-600 text-sm md:text-base">{step.description}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-red-800 mb-4">Register as a Student in Indore</h3>
+                  <p className="text-gray-600 text-sm md:text-base">Create your student account with basic information to access our help services in Indore.</p>
                 </div>
               </motion.div>
             ))}
@@ -357,7 +355,7 @@ const Home = ({ session }: { session: Session | null }) => {
               <ul className="space-y-3 text-sm md:text-base">
                 <li className="flex items-center gap-3">
                   <i className="fas fa-map-marker-alt text-red-400"></i>
-                  <span className="opacity-80">ABVP Indore</span>
+                  <span className="opacity-80">ABVP Indore Office</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <i className="fas fa-phone text-red-400"></i>
@@ -376,7 +374,7 @@ const Home = ({ session }: { session: Session | null }) => {
           </div>
 
           <div className="border-t border-white border-opacity-10 mt-8 pt-6 text-center">
-            <p className="opacity-80 text-sm md:text-base">© 2025 ABVP Student Help Portal. All rights reserved.</p>
+            <p className="opacity-80 text-sm md:text-base">© 2024 ABVP Student Help Portal. All rights reserved.</p>
           </div>
         </div>
       </footer>
