@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { FiSend } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 
 interface HelpModalProps {
   isOpen: boolean;
@@ -22,10 +23,11 @@ const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
     state: '',
     pincode: '',
     issue: '',
-    currentLocation: ''
+    currentLocation: '',
+    help_type: ''
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -33,35 +35,55 @@ const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Help form submitted:', formData);
     
-    // Redirect to volunteer results page with location data
-    const searchParams = new URLSearchParams({
-      location: formData.currentLocation,
-      city: formData.city,
-      state: formData.state,
-      pincode: formData.pincode
-    });
-    
-    onClose();
-    navigate(`/volunteers?${searchParams.toString()}`);
-    
-    // Reset form
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      course: '',
-      collegeName: '',
-      universityName: '',
-      city: '',
-      state: '',
-      pincode: '',
-      issue: '',
-      currentLocation: ''
-    });
+    try {
+        const { data, error } = await supabase.from('help_requests').insert([{
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            location: `${formData.city}, ${formData.state}`,
+            help_type: formData.help_type,
+            description: formData.issue,
+        }]);
+
+        if (error) {
+            throw error;
+        }
+
+        alert('Help request submitted successfully!');
+
+        // Redirect to volunteer results page with location data
+        const searchParams = new URLSearchParams({
+            location: formData.currentLocation,
+            city: formData.city,
+            state: formData.state,
+            pincode: formData.pincode
+        });
+        
+        onClose();
+        navigate(`/volunteers?${searchParams.toString()}`);
+        
+        // Reset form
+        setFormData({
+            name: '',
+            phone: '',
+            email: '',
+            course: '',
+            collegeName: '',
+            universityName: '',
+            city: '',
+            state: '',
+            pincode: '',
+            issue: '',
+            currentLocation: '',
+            help_type: ''
+        });
+
+    } catch (error: any) {
+        alert(error.error_description || error.message);
+    }
   };
 
   return (
@@ -245,6 +267,27 @@ const HelpModal = ({ isOpen, onClose }: HelpModalProps) => {
                           onChange={handleInputChange}
                           className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
                         />
+                      </div>
+
+                      <div>
+                        <label htmlFor="help_type" className="block text-sm font-medium text-gray-700 mb-2">
+                          Help Type *
+                        </label>
+                        <select
+                          id="help_type"
+                          name="help_type"
+                          value={formData.help_type}
+                          onChange={handleInputChange}
+                          className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-lg"
+                          required
+                        >
+                          <option value="">Select Help Type</option>
+                          <option value="Academic Support">Academic Support</option>
+                          <option value="Medical Assistance">Medical Assistance</option>
+                          <option value="Financial Aid">Financial Aid</option>
+                          <option value="Legal Guidance">Legal Guidance</option>
+                          <option value="Mental Health">Mental Health</option>
+                        </select>
                       </div>
                     </div>
 

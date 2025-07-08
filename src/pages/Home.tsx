@@ -1,14 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiHelpCircle, FiUserPlus } from 'react-icons/fi';
+import { FiHelpCircle, FiUserPlus, FiLogOut } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import ImageSlider from '../components/ImageSlider';
 import HelpModal from '../components/HelpModal';
 import CustomCursor from '../components/CustomCursor';
+import { supabase } from '../lib/supabaseClient';
+import { Session } from '@supabase/supabase-js';
 
-const Home = () => {
+const Home = ({ session }: { session: Session | null }) => {
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    if (session) {
+      const { user } = session;
+      if (user && user.user_metadata && user.user_metadata.full_name) {
+        setUserName(user.user_metadata.full_name);
+      }
+    }
+  }, [session]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/login');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -39,7 +56,7 @@ const Home = () => {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="text-xl md:text-2xl font-bold leading-tight"
                 >
-                  ABVP : MAY I HELP YOU
+                  ABVP INDORE: MAY I HELP YOU
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -65,16 +82,32 @@ const Home = () => {
             
             {/* Auth Buttons - Only Register button now */}
             <div className="flex gap-2 md:gap-3 order-3">
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                onClick={() => navigate('/register')}
-                className="bg-red-600 text-white px-3 py-2 md:px-4 md:py-2 rounded font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover-element inline-flex items-center gap-2 text-sm md:text-base"
-              >
-                <FiUserPlus className="w-3 h-3 md:w-4 md:h-4" />
-                Register
-              </motion.button>
+              {session ? (
+                <div className="flex items-center gap-4">
+                  <span className="text-white font-semibold">Welcome, {userName}</span>
+                  <motion.button
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8, duration: 0.6 }}
+                    onClick={handleLogout}
+                    className="bg-red-600 text-white px-3 py-2 md:px-4 md:py-2 rounded font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover-element inline-flex items-center gap-2 text-sm md:text-base"
+                  >
+                    <FiLogOut className="w-3 h-3 md:w-4 md:h-4" />
+                    Logout
+                  </motion.button>
+                </div>
+              ) : (
+                <motion.button
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  onClick={() => navigate('/register')}
+                  className="bg-red-600 text-white px-3 py-2 md:px-4 md:py-2 rounded font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover-element inline-flex items-center gap-2 text-sm md:text-base"
+                >
+                  <FiUserPlus className="w-3 h-3 md:w-4 md:h-4" />
+                  Register
+                </motion.button>
+              )}
             </div>
 
             {/* Mobile Navigation - Full width on mobile */}
@@ -112,7 +145,7 @@ const Home = () => {
                 transition={{ delay: 0.8, duration: 0.6 }}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
               >
-                ABVP : MAY I HELP YOU
+                ABVP INDORE: MAY I HELP YOU
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -324,15 +357,15 @@ const Home = () => {
               <ul className="space-y-3 text-sm md:text-base">
                 <li className="flex items-center gap-3">
                   <i className="fas fa-map-marker-alt text-red-400"></i>
-                  <span className="opacity-80">123 Education Street, New Delhi</span>
+                  <span className="opacity-80">ABVP Indore</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <i className="fas fa-phone text-red-400"></i>
-                  <span className="opacity-80">+91 11 2345 6789</span>
+                  <span className="opacity-80">+91 7745900814</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <i className="fas fa-envelope text-red-400"></i>
-                  <span className="opacity-80">help@abvp.org</span>
+                  <span className="opacity-80">info.abvpindore@gmail.com</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <i className="fas fa-clock text-red-400"></i>
@@ -343,7 +376,7 @@ const Home = () => {
           </div>
 
           <div className="border-t border-white border-opacity-10 mt-8 pt-6 text-center">
-            <p className="opacity-80 text-sm md:text-base">© 2023 ABVP Student Help Portal. All rights reserved.</p>
+            <p className="opacity-80 text-sm md:text-base">© 2025 ABVP Student Help Portal. All rights reserved.</p>
           </div>
         </div>
       </footer>

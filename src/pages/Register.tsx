@@ -1,8 +1,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { supabase } from '../lib/supabaseClient';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -21,14 +23,37 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-    console.log('Register attempt:', formData);
-    // Handle registration logic here
+    
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+          },
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      alert('Registration successful! Please check your email to confirm your account.');
+      
+      if (data.session) {
+        navigate('/');
+      }
+
+    } catch (error: any) {
+      alert(error.error_description || error.message);
+    }
   };
 
   return (

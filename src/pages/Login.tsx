@@ -1,18 +1,34 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { supabase } from '../lib/supabaseClient';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
-    // Handle login logic here
+    
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      navigate('/');
+
+    } catch (error: any) {
+      alert(error.error_description || error.message);
+    }
   };
 
   return (
