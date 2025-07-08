@@ -34,30 +34,30 @@ const VolunteerResults = () => {
       const mockVolunteers: Volunteer[] = [
         {
           id: '1',
-          name: 'John Smith',
-          phone: '+1 234-567-8901',
-          email: 'john.smith@email.com',
+          name: 'Ritesh patel',
+          phone: '+91 7745900814',
+          email: 'ritesh.patel@email.com',
           skills: ['Teaching', 'Mentoring', 'Event Organization'],
           location: `${city}, ${state}`,
-          availability: 'Weekends'
+          availability: 'Flexible'
         },
         {
           id: '2',
-          name: 'Sarah Johnson',
-          phone: '+1 234-567-8902',
-          email: 'sarah.johnson@email.com',
+          name: 'Kushal yadav',
+          phone: '+91 9826190704',
+          email: 'Kushal.yadav@email.com',
           skills: ['Healthcare', 'Community Outreach', 'Fundraising'],
           location: `${city}, ${state}`,
           availability: 'Weekdays'
         },
         {
           id: '3',
-          name: 'Mike Davis',
-          phone: '+1 234-567-8903',
-          email: 'mike.davis@email.com',
-          skills: ['Construction', 'Event Setup', 'Transportation'],
+          name: 'Kamaksha goud',
+          phone: '+91  9285012321',
+          email: 'Kamaksha.goud@email.com',
+          skills: ['Social Media', 'Event Setup', 'socializing'],
           location: `${city}, ${state}`,
-          availability: 'Flexible'
+          availability: 'Weekends'
         }
       ];
       
