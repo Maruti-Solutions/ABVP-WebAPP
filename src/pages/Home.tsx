@@ -25,11 +25,11 @@ const Home = () => {
           <div className="flex justify-between items-center flex-wrap lg:flex-nowrap">
             {/* Logo Section */}
             <div className="flex items-center gap-3 order-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-transparent">
+              <div className="w-16 h-16 md:w-20 md:h-20">
                 <img 
                   src="/lovable-uploads/be64dbdf-c51f-4b00-b49d-d6eebd8df4f8.png" 
                   alt="ABVP Logo" 
-                  className="w-full h-full object-contain filter brightness-0 invert"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -260,11 +260,11 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12 bg-transparent">
+                <div className="w-12 h-12">
                   <img 
                     src="/lovable-uploads/be64dbdf-c51f-4b00-b49d-d6eebd8df4f8.png" 
                     alt="ABVP Logo" 
-                    className="w-full h-full object-contain filter brightness-0 invert"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div>
