@@ -11,9 +11,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
-  ].filter(Boolean),
+    mode === "development" && componentTagger(),
+  ].filter(Boolean), // ✅ remove false entries
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -25,6 +24,15 @@ export default defineConfig(({ mode }) => ({
   build: {
     commonjsOptions: {
       include: [/node_modules/],
+    },
+    chunkSizeWarningLimit: 1000, // ✅ optional: avoid Vercel's >500kb warning
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          supabase: ["@supabase/supabase-js"],
+        },
+      },
     },
   },
 }));
